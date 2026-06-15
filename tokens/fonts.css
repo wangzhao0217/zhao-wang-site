@@ -1,0 +1,15 @@
+/* ============================================================
+   FONTS — webfonts loaded from Google Fonts CDN.
+
+   SUBSTITUTION NOTE: Anthropic's brand uses the proprietary
+   Styrene (sans) and Copernicus/Tiempos (serif) typefaces, which
+   are not publicly licensed. These are the closest open
+   substitutes and define the same warm, editorial character:
+     - Hanken Grotesk  → Styrene  (humanist grotesque, body/UI)
+     - Newsreader      → Copernicus/Tiempos (literary serif display)
+     - JetBrains Mono  → code / package names / data
+   Swap in the real font files (self-hosted @font-face) if you
+   have licences.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;500;600&display=swap');

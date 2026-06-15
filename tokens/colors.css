@@ -1,0 +1,108 @@
+/* ============================================================
+   COLORS — Zhao Wang Research personal site
+   A Claude-inspired warm palette (Anthropic ivory + clay/coral)
+   applied to a transport-data-science researcher brand.
+   Base palette + semantic aliases + a warm "flow" data scale.
+   ============================================================ */
+
+:root {
+  /* ---- Warm neutrals (Claude "ivory" family) ---- */
+  --cream:     #FAF9F5; /* lightest page wash        */
+  --ivory:     #F0EEE6; /* signature warm background */
+  --ivory-200: #E8E6DA;
+  --ivory-300: #DBD8CC;
+  --ivory-400: #C9C5B5;
+  --parchment: #F4F2EA;
+
+  /* ---- Clay / coral accent (the "Claude" orange) ---- */
+  --clay-100: #F6E7DF;
+  --clay-200: #ECC8B6;
+  --clay-300: #E0A688;
+  --clay:     #D97757; /* primary accent            */
+  --clay-600: #C15F3C; /* hover / pressed           */
+  --clay-700: #A24A2C;
+
+  /* ---- Warm ink ---- */
+  --ink-900: #141413; /* near-black, warm           */
+  --ink-800: #1F1E1D;
+  --ink-700: #3A3733;
+  --ink-600: #6B6760; /* muted body / captions      */
+  --ink-500: #8C877D;
+  --ink-400: #ACA89E;
+  --white:   #ffffff;
+
+  /* ---- Secondary accents (from the Anthropic extended palette) ----
+     Used sparingly for tags, callouts and data categories. */
+  --book-cloth: #CC785C; /* warm rust   */
+  --kraft:      #D4A27F; /* tan         */
+  --manilla:    #EBDBBC; /* pale straw  */
+  --slate:      #5E6E8C; /* muted blue  */
+  --sage:       #6E7F62; /* muted green */
+  --heather:    #8A6E8C; /* muted plum  */
+
+  /* ---- Warm sequential "flow" scale ----
+     Re-themed route-network / map data scale in Claude tones
+     (low → high magnitude). For maps, charts, accents. */
+  --flow-0: #EBDBBC; /* manilla   */
+  --flow-1: #E0B98F;
+  --flow-2: #D99B6C;
+  --flow-3: #D97757; /* clay      */
+  --flow-4: #C15F3C;
+  --flow-5: #93472B;
+  --flow-6: #5A2A1A; /* deep ember */
+  --flow-gradient: linear-gradient(90deg,
+    var(--flow-0), var(--flow-1), var(--flow-2),
+    var(--flow-3), var(--flow-4), var(--flow-5), var(--flow-6));
+
+  /* ============ Semantic aliases ============ */
+
+  /* Brand / interactive */
+  --color-primary:       var(--clay);
+  --color-primary-hover: var(--clay-600);
+  --color-primary-soft:  var(--clay-100);
+  --color-on-primary:    #fff;
+  --link:                var(--clay-600);
+  --link-hover:          var(--clay-700);
+  --focus-ring:          rgba(217, 119, 87, 0.40);
+
+  /* Text */
+  --text-heading: var(--ink-900);
+  --text-body:    var(--ink-800);
+  --text-muted:   var(--ink-600);
+  --text-subtle:  var(--ink-500);
+  --text-on-dark: var(--ivory);
+  --text-link:    var(--clay-600);
+
+  /* Surfaces */
+  --surface-page:    var(--ivory);
+  --surface-raised:  var(--cream);
+  --surface-card:    #FFFFFF;
+  --surface-subtle:  var(--parchment);
+  --surface-sunken:  var(--ivory-200);
+  --surface-inverse: var(--ink-900);
+  --surface-brand:   var(--clay);
+
+  /* Lines & borders */
+  --border-color:  var(--ivory-300);
+  --border-strong: var(--ivory-400);
+  --divider:       var(--ivory-200);
+
+  /* Status / semantic (warm-leaning) */
+  --color-success: var(--sage);
+  --color-danger:  #B23B2E;
+  --color-warning: #C98A2B;
+  --color-info:    var(--slate);
+  --color-note:    var(--clay);
+
+  --success-soft: #E6EBDF;
+  --danger-soft:  #F6E0DC;
+  --warning-soft: #F6EBD5;
+  --info-soft:    #E4E8EF;
+  --note-soft:    var(--clay-100);
+
+  /* Code */
+  --code-bg:          var(--ink-900);
+  --code-text:        #EDEAE0;
+  --code-inline-bg:   var(--ivory-200);
+  --code-inline-text: var(--clay-700);
+}

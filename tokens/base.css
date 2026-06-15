@@ -1,0 +1,98 @@
+/* ============================================================
+   BASE — light reset + base element styling.
+   Sets the ivory ground, warm ink text, serif headings, links.
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--text-body);
+  background-color: var(--surface-page);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Headings — editorial serif */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 0.5em;
+  font-family: var(--font-display);
+  color: var(--text-heading);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-snug);
+  text-wrap: balance;
+}
+h1 { font-size: var(--text-3xl); }
+h2 { font-size: var(--text-2xl); }
+h3 { font-size: var(--text-xl); }
+h4 { font-size: var(--text-lg); }
+
+p { margin: 0 0 1em; text-wrap: pretty; }
+
+a {
+  color: var(--link);
+  text-decoration: none;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+a:hover { color: var(--link-hover); text-decoration: underline; }
+
+strong, b { font-weight: var(--weight-semibold); }
+
+small { font-size: var(--text-xs); }
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--divider);
+  margin: var(--space-6) 0;
+}
+
+img, svg, video { max-width: 100%; display: block; }
+
+/* Code */
+code, pre, kbd, samp {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  font-feature-settings: "liga" 0;
+}
+code {
+  background: var(--code-inline-bg);
+  color: var(--code-inline-text);
+  padding: 0.12em 0.38em;
+  border-radius: var(--radius-xs);
+}
+pre {
+  background: var(--code-bg);
+  color: var(--code-text);
+  padding: var(--space-5);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  line-height: var(--leading-normal);
+}
+pre code { background: none; color: inherit; padding: 0; }
+
+::selection { background: var(--clay-200); color: var(--ink-900); }
+
+:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* Utility: constrained reading column */
+.prose { max-width: var(--container-md); }
+.prose p { font-size: var(--text-base); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
