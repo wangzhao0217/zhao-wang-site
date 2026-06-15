@@ -26,13 +26,49 @@ function Section({ id, eyebrow, title, intro, children, tint }) {
 }
 window.Section = Section;
 
+function ProjectTile({ pr }) {
+  const { Card, Badge } = PROJ_NS;
+  const lang = window.useLang();
+  const t = (v) => window.tx(v, lang);
+  return (
+    <Card interactive padding="none" style={{ display: "flex", flexDirection: "column", height: "100%" }}
+      media={<window.ProjectMotif motif={pr.motif} image={pr.image} alt={t(pr.imageAlt)} />}>
+      <div style={{ padding: "var(--space-5)", display: "flex", flexDirection: "column", gap: "0.6rem", flex: 1 }}>
+        {pr.meta ? (
+          <div style={{ fontFamily: "var(--font-mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)" }}>
+            <span style={{ color: "var(--term-prompt)" }}>$</span> {t(pr.meta)}
+          </div>
+        ) : null}
+        <h3 style={{ margin: 0, fontSize: "var(--text-lg)", fontWeight: "var(--weight-medium)" }}>{t(pr.title)}</h3>
+        {pr.blurb ? (
+          <p style={{ margin: 0, fontSize: "var(--text-sm)", color: "var(--text-muted)", lineHeight: "var(--leading-normal)" }}>{t(pr.blurb)}</p>
+        ) : null}
+        {(pr.tags || []).length ? (
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginTop: "0.15rem" }}>
+            {pr.tags.map((tg, i) => <Badge key={i} tone={tg.tone || "kraft"} size="sm">{t(tg.label)}</Badge>)}
+          </div>
+        ) : null}
+        {(pr.links || []).length ? (
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.9rem", marginTop: "auto", paddingTop: "0.5rem" }}>
+            {pr.links.map((l, i) => (
+              <a key={i} href={l.href} style={{ display: "inline-flex", alignItems: "center", gap: "0.35rem",
+                fontFamily: "var(--font-mono)", fontSize: "var(--text-sm)", fontWeight: "var(--weight-semibold)",
+                color: "var(--text-link)", textDecoration: "none" }}>
+                <Icon name={l.icon} />{t(l.label)}
+              </a>
+            ))}
+          </div>
+        ) : null}
+      </div>
+    </Card>
+  );
+}
+window.ProjectTile = ProjectTile;
+
 function PartBlock({ part, index }) {
-  const { ProjectCard } = PROJ_NS;
   const lang = window.useLang();
   const t = (v) => window.tx(v, lang);
   const S = window.SITE;
-  const mapLinks = (links) => (links || []).map((l) => ({ label: t(l.label), href: l.href, icon: <Icon name={l.icon} /> }));
-  const mapTags = (tags) => (tags || []).map((tg) => ({ tone: tg.tone, label: t(tg.label) }));
 
   return (
     <div style={{ marginTop: index === 0 ? 0 : "clamp(3rem, 6vw, 5rem)" }}>
@@ -71,10 +107,7 @@ function PartBlock({ part, index }) {
 
       {/* Projects */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "1.5rem" }}>
-        {part.projects.map((pr, i) => (
-          <ProjectCard key={i} image={pr.image} imageAlt={t(pr.imageAlt)} title={t(pr.title)}
-            meta={t(pr.meta)} blurb={t(pr.blurb)} tags={mapTags(pr.tags)} links={mapLinks(pr.links)} />
-        ))}
+        {part.projects.map((pr, i) => <ProjectTile key={i} pr={pr} />)}
       </div>
     </div>
   );
