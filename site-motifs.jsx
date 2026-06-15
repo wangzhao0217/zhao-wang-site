@@ -164,7 +164,143 @@
     );
   }
 
-  const MOTIFS = { fea: Fea, crack: Crack, align: Align, corenet: Corenet, simplify: Simplify, ev: Ev };
+  // ---- Multimodal model examining road condition ----
+  function Multimodal() {
+    const mods = [
+      { y: 40, c: "var(--slate)", label: "SAT" },
+      { y: 90, c: "var(--sage)", label: "IMU" },
+      { y: 140, c: "var(--heather)", label: "VLM" },
+    ];
+    const cx = 188, cy = 90;
+    const cells = [232, 250, 268, 286];
+    return wrap(
+      <svg viewBox={VB} width="100%" style={{ display: "block" }}>
+        <Grid /><rect width="320" height="180" fill="url(#zwm-grid)" />
+        {mods.map((m, i) => (
+          <line key={`l${i}`} x1="94" y1={m.y} x2={cx - 17} y2={cy}
+            stroke={m.c} strokeWidth="2" strokeDasharray="6 7" className="zwm-flow"
+            style={{ animationDelay: `${i * 0.15}s` }} />
+        ))}
+        {mods.map((m, i) => (
+          <g key={`m${i}`}>
+            <rect x="20" y={m.y - 15} width="74" height="30" rx="4" fill="var(--surface-card)" stroke={m.c} strokeWidth="1.6" />
+            <circle cx="37" cy={m.y} r="4.5" fill={m.c} className="zwm-pulse" style={{ animationDelay: `${i * 0.4}s` }} />
+            <text x="52" y={m.y + 4} fill="var(--text-body)" style={{ font: "700 11px var(--font-mono)" }}>{m.label}</text>
+          </g>
+        ))}
+        <circle cx={cx} cy={cy} r="16" fill="none" stroke="var(--clay)" strokeWidth="1.5" className="zwm-ring" />
+        <circle cx={cx} cy={cy} r="17" fill="var(--clay-100)" stroke="var(--clay)" strokeWidth="2" />
+        <text x={cx} y={cy + 4} textAnchor="middle" fill="var(--clay)" style={{ font: "700 10px var(--font-mono)" }}>ML</text>
+        <line x1={cx + 17} y1={cy} x2="226" y2={cy} stroke="var(--clay)" strokeWidth="2" strokeDasharray="6 7" className="zwm-flow" />
+        <text x="259" y="60" textAnchor="middle" fill="var(--text-muted)" style={{ font: "600 9px var(--font-mono)" }}>condition</text>
+        {cells.map((x, i) => (
+          <rect key={`c${i}`} x={x} y="72" width="14" height="40" rx="2" className="zwm-class"
+            style={{ animationDelay: `${i * 0.5}s` }} fill="var(--flow-0)" />
+        ))}
+      </svg>
+    );
+  }
+
+  // ---- GIS + AI flood-risk ----
+  function FloodGis() {
+    return wrap(
+      <svg viewBox={VB} width="100%" style={{ display: "block" }}>
+        <Grid /><rect width="320" height="180" fill="url(#zwm-grid)" />
+        <path d="M10,150 Q90,120 150,120 T310,98" fill="none" stroke="var(--ink-600)" strokeWidth="4" opacity="0.5" />
+        <path d="M10,150 Q90,120 150,120 T310,98" fill="none" stroke="var(--kraft)" strokeWidth="1.5" strokeDasharray="8 8" className="zwm-flow" />
+        <g className="zwm-tide">
+          <rect x="0" y="122" width="320" height="80" fill="var(--slate)" opacity="0.26" />
+          <path className="zwm-wave" d="M-80,122 q20,-6 40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0 t40,0" fill="none" stroke="var(--slate)" strokeWidth="2" opacity="0.6" />
+        </g>
+        {[[70, 130], [150, 124], [236, 110]].map((p, i) => (
+          <g key={i}>
+            <circle cx={p[0]} cy={p[1]} r="5" fill="none" stroke="var(--flow-4)" strokeWidth="2" className="zwm-pulse" style={{ animationDelay: `${i * 0.5}s` }} />
+            <circle cx={p[0]} cy={p[1]} r="1.8" fill="var(--flow-4)" />
+          </g>
+        ))}
+        <g transform="translate(20,22)">
+          <rect x="0" y="0" width="48" height="20" rx="3" fill="var(--clay-100)" stroke="var(--clay)" strokeWidth="1.5" />
+          <text x="24" y="14" textAnchor="middle" fill="var(--clay)" style={{ font: "700 10px var(--font-mono)" }}>GIS·AI</text>
+        </g>
+        <text x="304" y="30" textAnchor="end" fill="var(--flow-4)" style={{ font: "700 10px var(--font-mono)" }} className="zwm-blink">⚠ flood risk</text>
+      </svg>
+    );
+  }
+
+  // ---- NPT Scotland: cycle network coloured by flow ----
+  function NptMap() {
+    // routes [d, flowLevel 0..6]
+    const routes = [
+      ["M24,150 L70,120 L96,128 L150,96", 2],
+      ["M150,96 L210,104 L262,72", 4],
+      ["M70,120 L84,80 L120,52", 3],
+      ["M120,52 L186,46 L236,64", 5],
+      ["M150,96 L160,132 L210,150", 4],
+      ["M236,64 L286,40", 1],
+      ["M96,128 L132,150", 2],
+      ["M210,104 L226,140 L280,150", 3],
+      ["M120,52 L150,96", 6],
+    ];
+    return wrap(
+      <svg viewBox={VB} width="100%" style={{ display: "block" }}>
+        <Grid /><rect width="320" height="180" fill="url(#zwm-grid)" />
+        {routes.map((r, i) => (
+          <path key={`b${i}`} d={r[0]} fill="none" stroke={`var(--flow-${r[1]})`}
+            strokeWidth={1.8 + r[1] * 0.7} strokeLinecap="round" opacity="0.3" />
+        ))}
+        {routes.map((r, i) => (
+          <path key={`f${i}`} d={r[0]} fill="none" stroke={`var(--flow-${Math.min(6, r[1] + 1)})`}
+            strokeWidth={1.2 + r[1] * 0.4} strokeLinecap="round" strokeDasharray="6 8"
+            className="zwm-flow" style={{ animationDelay: `${i * 0.1}s` }} opacity="0.9" />
+        ))}
+        {/* legend */}
+        <g transform="translate(20,158)">
+          <rect x="0" y="0" width="86" height="8" rx="2" fill="url(#zwm-legend)" />
+          <text x="92" y="8" fill="var(--text-muted)" style={{ font: "600 8px var(--font-mono)" }}>flow</text>
+        </g>
+        <defs>
+          <linearGradient id="zwm-legend" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stopColor="var(--flow-0)" /><stop offset="0.5" stopColor="var(--flow-3)" /><stop offset="1" stopColor="var(--flow-6)" />
+          </linearGradient>
+        </defs>
+        <g transform="translate(20,22)">
+          <rect x="0" y="0" width="40" height="20" rx="3" fill="var(--clay-100)" stroke="var(--clay)" strokeWidth="1.5" />
+          <text x="20" y="14" textAnchor="middle" fill="var(--clay)" style={{ font: "700 10px var(--font-mono)" }}>NPT</text>
+        </g>
+      </svg>
+    );
+  }
+
+  // ---- stplanr: origin–destination desire lines ----
+  function Desire() {
+    const O = [[40, 60], [56, 130], [44, 96]];
+    const D = [[250, 50], [276, 110], [228, 150], [200, 90]];
+    const pairs = [[0, 0], [0, 3], [1, 2], [1, 1], [2, 3], [2, 0], [0, 1]];
+    return wrap(
+      <svg viewBox={VB} width="100%" style={{ display: "block" }}>
+        <Grid /><rect width="320" height="180" fill="url(#zwm-grid)" />
+        {pairs.map((pr, i) => {
+          const a = O[pr[0]], b = D[pr[1]];
+          return <line key={i} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]}
+            stroke={`var(--flow-${(i % 5) + 1})`} strokeWidth={1.4 + (i % 3)} strokeLinecap="round"
+            strokeDasharray="5 7" className="zwm-flow" style={{ animationDelay: `${i * 0.12}s`, opacity: 0.85 }} />;
+        })}
+        {O.map((p, i) => (
+          <circle key={`o${i}`} cx={p[0]} cy={p[1]} r="6" fill="var(--sage)" stroke="var(--surface-card)" strokeWidth="2" className="zwm-pulse" style={{ animationDelay: `${i * 0.3}s` }} />
+        ))}
+        {D.map((p, i) => (
+          <circle key={`d${i}`} cx={p[0]} cy={p[1]} r="5" fill="var(--clay)" stroke="var(--surface-card)" strokeWidth="2" />
+        ))}
+        <g transform="translate(20,22)">
+          <rect x="0" y="0" width="64" height="20" rx="3" fill="var(--clay-100)" stroke="var(--clay)" strokeWidth="1.5" />
+          <text x="32" y="14" textAnchor="middle" fill="var(--clay)" style={{ font: "700 10px var(--font-mono)" }}>stplanr</text>
+        </g>
+        <text x="300" y="30" textAnchor="end" fill="var(--text-muted)" style={{ font: "600 9px var(--font-mono)" }}>OD desire lines</text>
+      </svg>
+    );
+  }
+
+  const MOTIFS = { fea: Fea, crack: Crack, align: Align, corenet: Corenet, simplify: Simplify, ev: Ev, multimodal: Multimodal, floodgis: FloodGis, nptmap: NptMap, desire: Desire };
 
   function ImageScan({ image, alt }) {
     const Bracket = (pos) => (
@@ -216,6 +352,10 @@
             0%{ transform: translate(28px,140px) } 30%{ transform: translate(120px,96px) }
             65%{ transform: translate(210px,70px) } 100%{ transform: translate(296px,92px) }
           }
+          @keyframes zwm-class { 0%{ fill: var(--flow-0) } 33%{ fill: var(--flow-2) } 66%{ fill: var(--flow-3) } 100%{ fill: var(--flow-0) } }
+          @keyframes zwm-ring { 0%{ r: 16; opacity: .55 } 100%{ r: 30; opacity: 0 } }
+          @keyframes zwm-tide { 0%,100%{ transform: translateY(16px) } 50%{ transform: translateY(2px) } }
+          @keyframes zwm-wave { 0%{ transform: translateX(0) } 100%{ transform: translateX(80px) } }
           .zwm-flow   { animation: zwm-flow 1.1s linear infinite; }
           .zwm-scan   { animation: zwm-scan 2.6s ease-in-out infinite; }
           .zwm-blink  { animation: zwm-blink 1.1s steps(1) infinite; }
@@ -229,6 +369,10 @@
           .zwm-detect { animation: zwm-blink 1.4s steps(1) infinite; }
           .zwm-charge { animation: zwm-charge 3.2s ease-in-out infinite; }
           .zwm-ev     { animation: zwm-ev 5.5s ease-in-out infinite; }
+          .zwm-class  { animation: zwm-class 3s ease-in-out infinite; }
+          .zwm-ring   { animation: zwm-ring 2.2s ease-out infinite; }
+          .zwm-tide   { animation: zwm-tide 4.5s ease-in-out infinite; }
+          .zwm-wave   { animation: zwm-wave 2s linear infinite; }
         `}</style>
         {image ? <ImageScan image={image} alt={alt} /> : (MOTIFS[motif] ? React.createElement(MOTIFS[motif]) : null)}
       </React.Fragment>
