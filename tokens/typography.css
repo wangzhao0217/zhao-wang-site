@@ -4,15 +4,16 @@
    ============================================================ */
 
 :root {
-  /* ---- Families ---- */
-  --font-sans:  "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  --font-serif: "Newsreader", Georgia, "Times New Roman", Times, "Noto Serif SC", "Songti SC", serif;
-  --font-mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  /* ---- Families (TERMINAL: monospace-forward) ----
+     Latin uses JetBrains Mono; CJK falls through to Apple PingFang SC. */
+  --font-mono:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "PingFang SC", "Microsoft YaHei", monospace;
+  --font-sans:  var(--font-mono);
+  --font-serif: var(--font-mono);
 
   /* Role aliases */
-  --font-body:    var(--font-sans);
-  --font-display: var(--font-serif);
-  --font-ui:      var(--font-sans);
+  --font-body:    var(--font-mono);
+  --font-display: var(--font-mono);
+  --font-ui:      var(--font-mono);
   --font-code:    var(--font-mono);
 
   /* ---- Type scale (1.250 major-third-ish, tuned) ---- */

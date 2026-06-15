@@ -1,108 +1,178 @@
 /* ============================================================
-   COLORS — Zhao Wang Research personal site
-   A Claude-inspired warm palette (Anthropic ivory + clay/coral)
-   applied to a transport-data-science researcher brand.
-   Base palette + semantic aliases + a warm "flow" data scale.
+   COLORS — Zhao Wang Research personal site · TERMINAL theme
+   Light  = Monokai Pro Light   (default :root)
+   Dark   = Monokai Pro Classic ([data-theme="dark"])
+   Variable NAMES are kept stable (clay / ivory / ink / flow
+   families) so every component keeps working; only values change.
+   Monokai Pro Classic values are exact; Monokai Pro Light values
+   are matched to the official light filter look.
    ============================================================ */
 
 :root {
-  /* ---- Warm neutrals (Claude "ivory" family) ---- */
-  --cream:     #FAF9F5; /* lightest page wash        */
-  --ivory:     #F0EEE6; /* signature warm background */
-  --ivory-200: #E8E6DA;
-  --ivory-300: #DBD8CC;
-  --ivory-400: #C9C5B5;
-  --parchment: #F4F2EA;
+  /* ---- Light ground (Monokai Pro Light) ---- */
+  --cream:     #FFFDFB;
+  --ivory:     #FAF4F2; /* page background */
+  --ivory-200: #F0E9E7;
+  --ivory-300: #E4DBD9;
+  --ivory-400: #CFC4C2;
+  --parchment: #F5EFEC;
 
-  /* ---- Clay / coral accent (the "Claude" orange) ---- */
-  --clay-100: #F6E7DF;
-  --clay-200: #ECC8B6;
-  --clay-300: #E0A688;
-  --clay:     #D97757; /* primary accent            */
-  --clay-600: #C15F3C; /* hover / pressed           */
-  --clay-700: #A24A2C;
+  /* ---- Accent: Monokai cyan/teal (was pink) ---- */
+  --clay-100: #D6EEF3;
+  --clay-200: #A6DBE6;
+  --clay-300: #5FBFD2;
+  --clay:     #1C8CA8; /* primary accent (light) */
+  --clay-600: #156E85;
+  --clay-700: #0F5567;
 
-  /* ---- Warm ink ---- */
-  --ink-900: #141413; /* near-black, warm           */
-  --ink-800: #1F1E1D;
-  --ink-700: #3A3733;
-  --ink-600: #6B6760; /* muted body / captions      */
-  --ink-500: #8C877D;
-  --ink-400: #ACA89E;
+  /* ---- Warm ink (Monokai Pro Light text) ---- */
+  --ink-900: #221F22;
+  --ink-800: #2D2A2E;
+  --ink-700: #4A464B;
+  --ink-600: #8B868A; /* comment / muted */
+  --ink-500: #A59FA0;
+  --ink-400: #BDB8B9;
   --white:   #ffffff;
 
-  /* ---- Secondary accents (from the Anthropic extended palette) ----
-     Used sparingly for tags, callouts and data categories. */
-  --book-cloth: #CC785C; /* warm rust   */
-  --kraft:      #D4A27F; /* tan         */
-  --manilla:    #EBDBBC; /* pale straw  */
-  --slate:      #5E6E8C; /* muted blue  */
-  --sage:       #6E7F62; /* muted green */
-  --heather:    #8A6E8C; /* muted plum  */
+  /* ---- Monokai accents (light, darkened for legibility) ---- */
+  --book-cloth: #D4572B; /* orange */
+  --kraft:      #9A7B16; /* yellow/gold */
+  --manilla:    #F0E5D6;
+  --slate:      #1C8CA8; /* cyan-blue */
+  --sage:       #4F9426; /* green */
+  --heather:    #6E5494; /* purple */
 
-  /* ---- Warm sequential "flow" scale ----
-     Re-themed route-network / map data scale in Claude tones
-     (low → high magnitude). For maps, charts, accents. */
-  --flow-0: #EBDBBC; /* manilla   */
-  --flow-1: #E0B98F;
-  --flow-2: #D99B6C;
-  --flow-3: #D97757; /* clay      */
-  --flow-4: #C15F3C;
-  --flow-5: #93472B;
-  --flow-6: #5A2A1A; /* deep ember */
+  /* ---- Monokai "syntax" data scale (light, no pink) ---- */
+  --flow-0: #4F9426; /* green  */
+  --flow-1: #2E9E8F; /* teal-green */
+  --flow-2: #1C8CA8; /* cyan   */
+  --flow-3: #9A7B16; /* yellow */
+  --flow-4: #D4572B; /* orange */
+  --flow-5: #6E5494; /* purple */
+  --flow-6: #156E85; /* deep teal */
   --flow-gradient: linear-gradient(90deg,
     var(--flow-0), var(--flow-1), var(--flow-2),
     var(--flow-3), var(--flow-4), var(--flow-5), var(--flow-6));
 
   /* ============ Semantic aliases ============ */
-
-  /* Brand / interactive */
   --color-primary:       var(--clay);
   --color-primary-hover: var(--clay-600);
   --color-primary-soft:  var(--clay-100);
   --color-on-primary:    #fff;
-  --link:                var(--clay-600);
-  --link-hover:          var(--clay-700);
-  --focus-ring:          rgba(217, 119, 87, 0.40);
+  --link:                var(--clay);
+  --link-hover:          var(--clay-600);
+  --focus-ring:          rgba(28, 140, 168, 0.38);
 
-  /* Text */
   --text-heading: var(--ink-900);
   --text-body:    var(--ink-800);
   --text-muted:   var(--ink-600);
   --text-subtle:  var(--ink-500);
-  --text-on-dark: var(--ivory);
-  --text-link:    var(--clay-600);
+  --text-on-dark: #FCFCFA;
+  --text-link:    var(--clay);
 
-  /* Surfaces */
   --surface-page:    var(--ivory);
-  --surface-raised:  var(--cream);
+  --surface-raised:  var(--parchment);
   --surface-card:    #FFFFFF;
-  --surface-subtle:  var(--parchment);
+  --surface-subtle:  var(--cream);
   --surface-sunken:  var(--ivory-200);
-  --surface-inverse: var(--ink-900);
+  --surface-inverse: #2D2A2E;
   --surface-brand:   var(--clay);
 
-  /* Lines & borders */
   --border-color:  var(--ivory-300);
   --border-strong: var(--ivory-400);
   --divider:       var(--ivory-200);
 
-  /* Status / semantic (warm-leaning) */
   --color-success: var(--sage);
-  --color-danger:  #B23B2E;
-  --color-warning: #C98A2B;
+  --color-danger:  #C0392B;
+  --color-warning: #B3901F;
   --color-info:    var(--slate);
   --color-note:    var(--clay);
 
-  --success-soft: #E6EBDF;
+  --success-soft: #E6F0DD;
   --danger-soft:  #F6E0DC;
-  --warning-soft: #F6EBD5;
-  --info-soft:    #E4E8EF;
+  --warning-soft: #F6ECCF;
+  --info-soft:    #DCEEF3;
   --note-soft:    var(--clay-100);
 
-  /* Code */
-  --code-bg:          var(--ink-900);
-  --code-text:        #EDEAE0;
+  --code-bg:          #2D2A2E;
+  --code-text:        #FCFCFA;
   --code-inline-bg:   var(--ivory-200);
-  --code-inline-text: var(--clay-700);
+  --code-inline-text: var(--clay-600);
+
+  /* Terminal chrome */
+  --term-prompt:  var(--sage);   /* the ❯ symbol + commands */
+  --term-string:  var(--kraft);  /* "quoted" strings */
+  --term-cursor:  var(--clay);
+  --nav-scrim:    rgba(250, 244, 242, 0.88);
+}
+
+/* ============================================================
+   DARK — Monokai Pro Classic (exact)
+   bg #2D2A2E · text #FCFCFA · pink #FF6188 · green #A9DC76
+   yellow #FFD866 · orange #FC9867 · cyan #78DCE8 · purple #AB9DF2
+   ============================================================ */
+[data-theme="dark"] {
+  --cream:     #353136;
+  --ivory:     #2D2A2E; /* page background */
+  --ivory-200: #353136;
+  --ivory-300: #403E41;
+  --ivory-400: #5B595C;
+  --parchment: #262329;
+
+  --clay-100: #173A42;
+  --clay-200: #1E5460;
+  --clay-300: #4FB6C8;
+  --clay:     #78DCE8; /* Monokai cyan */
+  --clay-600: #9AE7F0;
+  --clay-700: #BAF0F5;
+
+  --ink-900: #FCFCFA; /* now light */
+  --ink-800: #E8E6E1;
+  --ink-700: #C1C0C0;
+  --ink-600: #939293; /* dimmed2 */
+  --ink-500: #727072; /* dimmed3 */
+  --ink-400: #5B595C; /* dimmed4 */
+
+  --book-cloth: #FC9867; /* orange */
+  --kraft:      #FFD866; /* yellow */
+  --manilla:    #403E41;
+  --slate:      #78DCE8; /* cyan */
+  --sage:       #A9DC76; /* green */
+  --heather:    #AB9DF2; /* purple */
+
+  --flow-0: #A9DC76;
+  --flow-1: #5FD0C0;
+  --flow-2: #78DCE8;
+  --flow-3: #FFD866;
+  --flow-4: #FC9867;
+  --flow-5: #AB9DF2;
+  --flow-6: #78DCE8;
+
+  --focus-ring: rgba(120, 220, 232, 0.42);
+  --text-on-dark: #FCFCFA;
+
+  --surface-card:    #353136;
+  --surface-raised:  #262329;
+  --surface-subtle:  #2A272B;
+  --surface-sunken:  #221F22;
+  --surface-inverse: #19181A;
+
+  --border-color:  #403E41;
+  --border-strong: #5B595C;
+  --divider:       #353136;
+
+  --success-soft: #2E3A22;
+  --danger-soft:  #4A2A22;
+  --warning-soft: #3E3720;
+  --info-soft:    #1E363B;
+
+  --code-bg:          #19181A;
+  --code-text:        #FCFCFA;
+  --code-inline-bg:   #403E41;
+  --code-inline-text: var(--kraft);
+
+  --term-prompt: var(--sage);
+  --term-string: var(--kraft);
+  --term-cursor: var(--clay);
+  --nav-scrim:   rgba(45, 42, 46, 0.88);
 }

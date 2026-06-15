@@ -102,7 +102,7 @@ function Education() {
   const lang = window.useLang();
   const t = (v) => window.tx(v, lang);
   return (
-    <Section id="education" eyebrow={lang === "zh" ? "教育背景" : "Education"} title={t(S.ui.sections.eduTitle)} tint="var(--surface-raised)">
+    <Section id="education" eyebrow="cat education.txt" title={t(S.ui.sections.eduTitle)} tint="var(--surface-raised)">
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "1.5rem" }}>
         {S.education.map((ed, i) => (
           <div key={i} style={{ background: "var(--surface-card)", border: "1px solid var(--border-color)", borderRadius: "var(--radius-lg)", padding: "var(--space-5)", boxShadow: "var(--shadow-sm)" }}>

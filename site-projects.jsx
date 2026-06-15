@@ -7,13 +7,17 @@ function Section({ id, eyebrow, title, intro, children, tint }) {
       <div style={{ maxWidth: "var(--container-xl)", margin: "0 auto", padding: "clamp(3rem, 7vw, 5.5rem) var(--gutter)" }}>
         <div style={{ maxWidth: "var(--container-md)", marginBottom: "2.5rem" }}>
           {eyebrow ? (
-            <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "0.9rem" }}>
-              <span style={{ width: 24, height: 2, background: "var(--clay)" }} />
-              <span style={{ fontFamily: "var(--font-ui)", fontSize: "var(--text-xs)", fontWeight: 700, letterSpacing: "var(--tracking-eyebrow)", textTransform: "uppercase", color: "var(--clay-600)" }}>{eyebrow}</span>
+            <div style={{ fontFamily: "var(--font-mono)", fontSize: "var(--text-sm)", marginBottom: "0.9rem", color: "var(--text-muted)" }}>
+              <span style={{ color: "var(--term-prompt)", fontWeight: 700 }}>❯</span>{" "}
+              <span style={{ color: "var(--text-body)" }}>{eyebrow}</span>
             </div>
           ) : null}
-          <h2 style={{ fontSize: "clamp(1.9rem, 4vw, 2.6rem)", margin: "0 0 0.6rem" }}>{title}</h2>
-          {intro ? <p style={{ fontSize: "var(--text-md)", color: "var(--text-muted)", margin: 0, maxWidth: "62ch" }}>{intro}</p> : null}
+          <h2 style={{ fontSize: "clamp(1.7rem, 3.6vw, 2.4rem)", margin: "0 0 0.6rem", letterSpacing: "-0.01em" }}>
+            <span style={{ color: "var(--clay)" }}># </span>{title}
+          </h2>
+          {intro ? <p style={{ fontSize: "var(--text-base)", color: "var(--text-muted)", margin: 0, maxWidth: "64ch" }}>
+            <span style={{ color: "var(--ink-500)" }}>{"// "}</span>{intro}
+          </p> : null}
         </div>
         {children}
       </div>

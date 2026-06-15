@@ -1,4 +1,4 @@
-/* site-nav.jsx — sticky top navigation */
+/* site-nav.jsx — terminal title-bar navigation */
 const NS = window.ZhaoWangResearchDesignSystem_65eff9;
 
 function Icon({ name, style }) {
@@ -25,49 +25,53 @@ function Nav() {
     [S.ui.nav.publications, "publications"],
   ];
 
+  const dot = (c) => (
+    <span style={{ width: 12, height: 12, borderRadius: "50%", background: c, display: "inline-block" }} />
+  );
+
   const linkStyle = {
-    fontFamily: "var(--font-ui)",
+    fontFamily: "var(--font-mono)",
     fontSize: "var(--text-sm)",
-    fontWeight: "var(--weight-semibold)",
+    fontWeight: "var(--weight-medium)",
     color: "var(--text-body)",
     textDecoration: "none",
-    padding: "0.4rem 0.2rem",
+    padding: "0.2rem 0.1rem",
+    whiteSpace: "nowrap",
   };
 
   return (
     <header style={{
       position: "sticky", top: 0, zIndex: 50,
-      background: scrolled ? "rgba(240,238,230,0.85)" : "transparent",
-      backdropFilter: scrolled ? "saturate(160%) blur(12px)" : "none",
-      borderBottom: scrolled ? "1px solid var(--border-color)" : "1px solid transparent",
-      transition: "background var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out)",
+      background: "var(--nav-scrim)",
+      backdropFilter: "saturate(140%) blur(10px)",
+      borderBottom: "1px solid var(--border-strong)",
+      boxShadow: scrolled ? "var(--shadow-sm)" : "none",
     }}>
       <div style={{
         maxWidth: "var(--container-xl)", margin: "0 auto",
-        padding: "0.85rem var(--gutter)",
+        padding: "0.55rem var(--gutter)",
         display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem",
       }}>
-        <a href="#top" style={{ display: "flex", alignItems: "center", gap: "0.6rem", textDecoration: "none" }}>
-          <span style={{
-            width: 34, height: 34, borderRadius: "var(--radius-pill)",
-            background: "var(--clay)", color: "#fff",
-            display: "inline-flex", alignItems: "center", justifyContent: "center",
-            fontFamily: "var(--font-display)", fontWeight: 600, fontSize: 16,
-          }}>ZW</span>
-          <span style={{ fontFamily: "var(--font-display)", fontWeight: 600, fontSize: "var(--text-lg)", color: "var(--text-heading)", whiteSpace: "nowrap" }}>
-            {lang === "zh" ? "王曌" : "Zhao Wang"}
+        {/* traffic lights + path prompt */}
+        <a href="#top" style={{ display: "flex", alignItems: "center", gap: "0.7rem", textDecoration: "none", minWidth: 0 }}>
+          <span style={{ display: "inline-flex", gap: "0.45rem" }} className="nav-lights">
+            {dot("#FF5F56")}{dot("#FFBD2E")}{dot("#27C93F")}
+          </span>
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: "var(--text-sm)", color: "var(--text-muted)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+            <span style={{ color: "var(--term-prompt)" }}>zhao@leeds</span>:<span style={{ color: "var(--slate)" }}>~</span>{lang === "zh" ? "/王曌" : ""}$ <span style={{ color: "var(--text-heading)", fontWeight: 700 }}>portfolio</span>
           </span>
         </a>
 
-        <nav style={{ display: "flex", alignItems: "center", gap: "1.4rem" }} className="nav-links">
+        <nav style={{ display: "flex", alignItems: "center", gap: "1.2rem" }} className="nav-links">
           {sections.map(([label, id]) => (
             <a key={id} href={`#${id}`} style={linkStyle}
-               onMouseEnter={(e) => (e.currentTarget.style.color = "var(--clay-600)")}
+               onMouseEnter={(e) => (e.currentTarget.style.color = "var(--clay)")}
                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-body)")}>
-              {t(label)}
+              <span style={{ color: "var(--ink-500)" }}>./</span>{t(label)}
             </a>
           ))}
           <window.LangToggle />
+          <window.ThemeToggle />
           <Button variant="primary" size="sm" href="#contact" icon={<Icon name="envelope" />}>{t(S.ui.nav.contact)}</Button>
         </nav>
       </div>

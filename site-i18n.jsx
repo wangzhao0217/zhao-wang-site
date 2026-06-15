@@ -57,3 +57,33 @@ function LangToggle({ compact }) {
   );
 }
 window.LangToggle = LangToggle;
+
+/* ---- Theme (light / dark) ---- */
+const ThemeContext = React.createContext({ theme: "light", setTheme: () => {} });
+window.ThemeContext = ThemeContext;
+
+/** Round icon button toggling light ↔ dark. */
+function ThemeToggle() {
+  const { theme, setTheme } = React.useContext(ThemeContext);
+  const dark = theme === "dark";
+  return (
+    <button
+      onClick={() => setTheme(dark ? "light" : "dark")}
+      aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
+      title={dark ? "Light mode" : "Dark mode"}
+      style={{
+        width: 34, height: 34, flex: "0 0 auto",
+        display: "inline-flex", alignItems: "center", justifyContent: "center",
+        borderRadius: "var(--radius-pill)", cursor: "pointer",
+        border: "1px solid var(--border-strong)", background: "var(--surface-card)",
+        color: "var(--text-body)", fontSize: "1rem",
+        transition: "background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out)",
+      }}
+      onMouseEnter={(e) => { e.currentTarget.style.color = "var(--clay-600)"; }}
+      onMouseLeave={(e) => { e.currentTarget.style.color = "var(--text-body)"; }}
+    >
+      <i className={`bi ${dark ? "bi-sun" : "bi-moon-stars"}`} aria-hidden="true"></i>
+    </button>
+  );
+}
+window.ThemeToggle = ThemeToggle;

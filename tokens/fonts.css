@@ -12,4 +12,13 @@
    have licences.
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;500;600&display=swap');
+/* ============================================================
+   FONTS — TERMINAL theme.
+   Latin/UI: JetBrains Mono (webfont).
+   Chinese:  Apple "PingFang SC" — a system font on macOS/iOS, so
+   it is NOT loaded here; it's referenced first in the CJK part of
+   the font stack (tokens/typography.css). Non-Apple devices fall
+   back to Noto Sans SC (loaded below) then Microsoft YaHei.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Sans+SC:wght@400;500;700&display=swap');

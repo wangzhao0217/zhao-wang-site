@@ -54,7 +54,19 @@ function App() {
   }, []);
   React.useEffect(() => { document.documentElement.lang = lang === "zh" ? "zh-CN" : "en"; }, [lang]);
 
+  const [theme, setThemeState] = React.useState(() => {
+    try { return localStorage.getItem("zw-site-theme") || "light"; } catch (e) { return "light"; }
+  });
+  const setTheme = React.useCallback((next) => {
+    setThemeState(next);
+    try { localStorage.setItem("zw-site-theme", next); } catch (e) {}
+  }, []);
+  React.useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
   return (
+    <window.ThemeContext.Provider value={{ theme, setTheme }}>
     <window.LangContext.Provider value={{ lang, setLang }}>
       <Nav />
       <main>
@@ -67,6 +79,7 @@ function App() {
       </main>
       <Footer />
     </window.LangContext.Provider>
+    </window.ThemeContext.Provider>
   );
 }
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);
