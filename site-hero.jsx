@@ -7,6 +7,7 @@ function Hero() {
   const p = S.person;
   const lang = window.useLang();
   const t = (v) => window.tx(v, lang);
+  const [heroCmd, setHeroCmd] = React.useState("feh ~/papers");
 
   return (
     <section id="top" style={{ position: "relative", overflow: "hidden" }}>
@@ -47,7 +48,8 @@ function Hero() {
           <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", marginTop: "1.4rem" }}>
             <Button variant="primary" size="lg" href="#work" iconRight={<Icon name="arrow-right" />}>{t(S.ui.hero.seeWork)}</Button>
             <Button variant="secondary" size="lg" href={p.links.github} icon={<Icon name="github" />}>GitHub</Button>
-            <Button variant="ghost" size="lg" href={p.links.scholar} icon={<Icon name="mortarboard-fill" />}>{t(S.ui.hero.scholar)}</Button>
+            <Button variant="secondary" size="lg" href={p.links.scholar} icon={<Icon name="mortarboard-fill" />}>{t(S.ui.hero.scholar)}</Button>
+            <Button variant="secondary" size="lg" href={p.links.linkedin} icon={<Icon name="linkedin" />}>LinkedIn</Button>
           </div>
         </div>
 
@@ -65,22 +67,12 @@ function Hero() {
                 <span style={{ width: 11, height: 11, borderRadius: "50%", background: "#27C93F" }} />
               </span>
               <span style={{ fontFamily: "var(--font-mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)", marginLeft: "0.4rem" }}>
-                {lang === "zh" ? "rnet --watch ~/路网" : "rnet --watch ~/network"}
+                <span style={{ color: "var(--term-prompt)" }}>$</span> {heroCmd}<span className="zw-caret" aria-hidden="true" style={{ display: "inline-block", width: "0.5ch", height: "0.95em", marginLeft: "0.2em", background: "var(--term-cursor)", transform: "translateY(0.12em)" }} />
               </span>
             </div>
-            <window.NetworkHero />
+            <window.NetworkHero onScene={setHeroCmd} />
           </div>
-          <figcaption style={{
-            position: "absolute", bottom: "-0.8rem", left: "0.9rem",
-            display: "flex", alignItems: "center", gap: "0.5rem",
-            background: "var(--surface-card)", border: "1px solid var(--border-strong)",
-            borderRadius: "var(--radius-sm)", padding: "0.35rem 0.8rem", boxShadow: "var(--shadow-md)",
-          }}>
-            <span style={{ width: 14, height: 10, borderRadius: 2, background: "var(--flow-gradient)" }} />
-            <span style={{ fontFamily: "var(--font-mono)", fontSize: "var(--text-xs)", color: "var(--text-muted)" }}>
-              {lang === "zh" ? "路网流量 · 实时" : "route flow · live"}
-            </span>
-          </figcaption>
+          {/* the live caption now lives inside the slideshow (paper title + venue) */}
         </figure>
       </div>
 

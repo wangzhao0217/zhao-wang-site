@@ -17,6 +17,7 @@ function Contact() {
           <Button variant="primary" size="lg" href={`mailto:${p.email}`} icon={<Icon name="envelope-fill" />}>{p.email}</Button>
           <Button variant="onDark" size="lg" href={p.links.github} icon={<Icon name="github" />}>GitHub</Button>
           <Button variant="onDark" size="lg" href={p.links.scholar} icon={<Icon name="mortarboard-fill" />}>{t(S.ui.hero.scholar)}</Button>
+          <Button variant="onDark" size="lg" href={p.links.linkedin} icon={<Icon name="linkedin" />}>LinkedIn</Button>
         </div>
       </div>
     </section>
