@@ -14,10 +14,10 @@ function About() {
     { en: "Remote sensing", zh: "遥感" },
     { en: "R · Python · Rust", zh: "R · Python · Rust" },
   ];
-  const calloutTitle = { en: "How I work", zh: "工作方式" };
+  const calloutTitle = { en: "How I work", zh: "我的工作方式" };
   const calloutBody = {
     en: "Reproducible by default — every figure and tool regenerates from open data and version-controlled pipelines, so the work stays auditable and reusable.",
-    zh: "默认可复现——每一张图、每一个工具都基于开放数据与版本受控的流程自动生成，确保工作可审计、可复用。",
+    zh: "以可复现为默认：每一张图、每一个工具都能从开放数据与版本受控的流程中自动重建，确保成果可追溯、可复用。",
   };
 
   return (
